@@ -1,7 +1,7 @@
 {
-  "name": "appening-notif",
+  "name": "tangos-notif",
   "version": "1.0.0",
-  "description": "Appening Notif Util",
+  "description": "Tangos Notif Util",
   "main": "index.js",
   "lib": [
     "es6"
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saitejdandge/appening-notif.git"
+    "url": "git+https://github.com/appening/tangos-notif.git"
   },
-  "author": "saitejdandge",
+  "author": "appening",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/saitejdandge/appening-notif/issues"
+    "url": "https://github.com/appening/tangos-notif/issues"
   },
-  "homepage": "https://github.com/saitejdandge/appening-notif#readme",
+  "homepage": "https://github.com/appening/tangos-notif#readme",
   "dependencies": {
     "aws-sdk": "^2.608.0",
     "request": "^2.88.0"
