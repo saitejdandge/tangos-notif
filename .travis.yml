@@ -5,5 +5,5 @@ script:
   - "npm run build"
 deploy:
   provider: npm
-  email: saitejdandge1@gmail.com
+  email: appeningofficial@gmail.com
   api_key: $NPM_TOKEN
