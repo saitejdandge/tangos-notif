@@ -3,7 +3,7 @@ import { initSMSConfig } from "./config/SMSConfig";
 import { initSESConfig } from "./config/SESConfig";
 import { sendSMS } from "./services/SMSService";
 import { sendEmail } from "./services/EmailService";
-console.log("Loading Appening Notif SDK");
+console.log("Loading Tangos Notif SDK");
 module.exports= {
     initSMSConfig,
     initSESConfig,
@@ -11,6 +11,5 @@ module.exports= {
     setSMSEnabled,
     sendEmail,  
     sendSMS,
-
 }
 console.log(module.exports)
