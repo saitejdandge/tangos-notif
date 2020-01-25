@@ -1,7 +1,7 @@
 {
   "name": "tangos-notif",
   "version": "1.0.0",
-  "description": "Tangos Notif Util",
+  "description": "Tangos Notif Util ",
   "main": "index.js",
   "lib": [
     "es6"
