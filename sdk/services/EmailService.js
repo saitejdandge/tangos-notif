@@ -1,13 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const AWSSESClient_1 = require("../clients/AWSSESClient");
 const charset = 'UTF-8';
-const AWSSESClient_1 = require("../AWSSESClient");
-const config_1 = require("../config/config");
-const SESConfig_1 = require("../config/SESConfig");
 function sendEmail(subject, recipient, bodyHtml, bodyText) {
     console.log('Sending HTML Email to ', recipient);
     const params = {
-        Source: SESConfig_1.SENDER_EMAIL,
+        Source: AWSSESClient_1.AWSSESClient.senderEmail,
         Destination: {
             ToAddresses: [
                 recipient,
@@ -30,11 +28,11 @@ function sendEmail(subject, recipient, bodyHtml, bodyText) {
             },
         },
     };
-    if (!config_1.SESEnabled) {
+    if (!AWSSESClient_1.AWSSESClient.isEmailServiceEnabled) {
         return Promise.resolve({ message: 'Email sent', data: null, result: 1 });
     }
     return new Promise((resolve) => {
-        AWSSESClient_1.ses.sendEmail(params, (err, data) => {
+        AWSSESClient_1.AWSSESClient.getInstance().ses.sendEmail(params, (err, data) => {
             if (err) {
                 resolve({ result: 0, error: err });
             }

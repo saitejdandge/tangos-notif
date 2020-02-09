@@ -1,16 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SMSEnabled = true;
-exports.SESEnabled = true;
-class setSMSEnabled {
-    constructor(value) {
-        this.SMSEnabled = value;
-    }
+const SMSClient_1 = require("../clients/SMSClient");
+const AWSSESClient_1 = require("../clients/AWSSESClient");
+function setEmailServiceEnabled(value) {
+    AWSSESClient_1.AWSSESClient.isEmailServiceEnabled = value;
 }
-exports.setSMSEnabled = setSMSEnabled;
-class setSESEnabled {
-    constructor(value) {
-        this.SESEnabled = value;
-    }
+exports.setEmailServiceEnabled = setEmailServiceEnabled;
+function setSMSServiceEnabled(value) {
+    SMSClient_1.SMSClient.isSMSServiceEnabled = value;
 }
-exports.setSESEnabled = setSESEnabled;
+exports.setSMSServiceEnabled = setSMSServiceEnabled;

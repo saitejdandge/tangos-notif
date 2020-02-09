@@ -1,13 +1,13 @@
-import { setSESEnabled, setSMSEnabled } from './config/config';
-import { initSMSConfig } from './config/SMSConfig';
-import { initSESConfig } from './config/SESConfig';
-import { sendSMS } from './services/SMSService';
+import { AWSSESClient } from './clients/AWSSESClient';
+import { SMSClient } from './clients/SMSClient';
+import { setEmailServiceEnabled, setSMSServiceEnabled } from './config/config';
 import { sendEmail } from './services/EmailService';
+import { sendSMS } from './services/SMSService';
 declare const _default: {
-    initSMSConfig: typeof initSMSConfig;
-    initSESConfig: typeof initSESConfig;
-    setSESEnabled: typeof setSESEnabled;
-    setSMSEnabled: typeof setSMSEnabled;
+    setSMSServiceEnabled: typeof setSMSServiceEnabled;
+    setEmailServiceEnabled: typeof setEmailServiceEnabled;
+    AWSSESClient: typeof AWSSESClient;
+    SMSClient: typeof SMSClient;
     sendEmail: typeof sendEmail;
     sendSMS: typeof sendSMS;
 };

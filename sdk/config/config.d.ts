@@ -1,10 +1,2 @@
-export var SMSEnabled: boolean;
-export var SESEnabled: boolean;
-export class setSMSEnabled {
-    constructor(value: any);
-    SMSEnabled: any;
-}
-export class setSESEnabled {
-    constructor(value: any);
-    SESEnabled: any;
-}
+export declare function setEmailServiceEnabled(value: boolean): void;
+export declare function setSMSServiceEnabled(value: boolean): void;
