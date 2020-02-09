@@ -1,14 +1,12 @@
+import { AWSSESClient } from '../clients/AWSSESClient';
 const charset = 'UTF-8';
-import { ses } from '../AWSSESClient';
-import { SESEnabled } from '../config/config';
-import { SENDER_EMAIL as sender } from '../config/SESConfig';
 
 export function sendEmail(subject: string, recipient: string, bodyHtml: string, bodyText: string) {
 
   console.log('Sending HTML Email to ', recipient);
 
-  const params = {
-    Source: sender,
+  const params:any = {
+    Source: AWSSESClient.senderEmail,
     Destination: {
       ToAddresses: [
         recipient,
@@ -32,12 +30,12 @@ export function sendEmail(subject: string, recipient: string, bodyHtml: string, 
     },
   };
 
-  if (!SESEnabled) {
+  if (!AWSSESClient.isEmailServiceEnabled) {
     return Promise.resolve({ message: 'Email sent', data: null, result: 1 });
   }
 
   return new Promise((resolve) => {
-    ses.sendEmail(params,  (err: any, data: any) => {
+    AWSSESClient.getInstance().ses.sendEmail(params, (err: any, data: any) => {
       if (err) {
         resolve({ result: 0, error: err });
       } else {
