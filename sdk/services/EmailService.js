@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const AWSSESClient_1 = require("../clients/AWSSESClient");
+const TangosNotifClient_1 = require("../clients/TangosNotifClient");
 const charset = 'UTF-8';
 function sendEmail(subject, recipient, bodyHtml, bodyText) {
     console.log('Sending HTML Email to ', recipient);
     const params = {
-        Source: AWSSESClient_1.AWSSESClient.senderEmail,
+        Source: TangosNotifClient_1.TangosNotifClient.senderEmail,
         Destination: {
             ToAddresses: [
                 recipient,
@@ -28,13 +28,13 @@ function sendEmail(subject, recipient, bodyHtml, bodyText) {
             },
         },
     };
-    if (!AWSSESClient_1.AWSSESClient.isEmailServiceEnabled) {
+    if (!TangosNotifClient_1.TangosNotifClient.isEmailServiceEnabled) {
         return Promise.resolve({ message: 'Email sent', data: null, result: 1 });
     }
     return new Promise((resolve) => {
-        AWSSESClient_1.AWSSESClient.getInstance().ses.sendEmail(params, (err, data) => {
+        TangosNotifClient_1.TangosNotifClient.getInstance().ses.sendEmail(params, (err, data) => {
             if (err) {
-                resolve({ result: 0, error: err });
+                resolve({ result: 0, data: err, message: 'Something wen\'t wrong' });
             }
             else {
                 resolve({ data, message: 'Email sent' + data.MessageId, result: 1 });

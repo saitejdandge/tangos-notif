@@ -1,17 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const aws_sdk_1 = require("aws-sdk");
-class AWSSESClient {
+class TangosNotifClient {
     constructor() {
         this.ses = new aws_sdk_1.SES();
+        this.sns = new aws_sdk_1.SNS();
     }
     static getInstance() {
-        if (AWSSESClient.awsClient == null) {
+        if (TangosNotifClient.awsClient == null) {
             if (this.accessKeyId == null || this.secretAccessKey == null || this.senderEmail == null) {
                 throw new Error('Please call AWSSESClient.initConfig() method before using its instance');
             }
             else {
-                this.awsClient = new AWSSESClient();
+                this.awsClient = new TangosNotifClient();
             }
         }
         return this.awsClient;
@@ -27,6 +28,7 @@ class AWSSESClient {
         });
     }
 }
-exports.AWSSESClient = AWSSESClient;
-AWSSESClient.isEmailServiceEnabled = true;
-AWSSESClient.region = 'us-east-1';
+exports.TangosNotifClient = TangosNotifClient;
+TangosNotifClient.isEmailServiceEnabled = true;
+TangosNotifClient.isSMSServiceEnabled = true;
+TangosNotifClient.region = 'us-east-1';

@@ -1,6 +1,6 @@
 {
   "name": "tangos-notif",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Tangos Notif Util ",
   "main": "index.js",
   "lib": [
@@ -8,8 +8,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d build",
-    "tsc": "tsc",
+    "build": "tsc",
     "lint": "tslint -c tslint.json src/**/*.ts{,x}"
   },
   "repository": {

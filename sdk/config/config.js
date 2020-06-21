@@ -1,12 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const SMSClient_1 = require("../clients/SMSClient");
-const AWSSESClient_1 = require("../clients/AWSSESClient");
+const TangosNotifClient_1 = require("../clients/TangosNotifClient");
 function setEmailServiceEnabled(value) {
-    AWSSESClient_1.AWSSESClient.isEmailServiceEnabled = value;
+    TangosNotifClient_1.TangosNotifClient.isEmailServiceEnabled = value;
 }
 exports.setEmailServiceEnabled = setEmailServiceEnabled;
 function setSMSServiceEnabled(value) {
-    SMSClient_1.SMSClient.isSMSServiceEnabled = value;
+    TangosNotifClient_1.TangosNotifClient.isSMSServiceEnabled = value;
 }
 exports.setSMSServiceEnabled = setSMSServiceEnabled;

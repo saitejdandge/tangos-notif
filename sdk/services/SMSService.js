@@ -1,26 +1,37 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SMSClient_1 = require("../clients/SMSClient");
-const request_1 = __importDefault(require("request"));
-function sendSMS(mobileNumber, content) {
-    return new Promise((resolve) => {
-        if (!SMSClient_1.SMSClient.isSMSServiceEnabled) {
-            return Promise.resolve({ message: 'SMS Sent to ' + mobileNumber, result: 1, data: content });
+const TangosNotifClient_1 = require("../clients/TangosNotifClient");
+async function sendSMS(mobileNumber, content, highImportance = true) {
+    if (!TangosNotifClient_1.TangosNotifClient.isSMSServiceEnabled) {
+        return { message: 'SMS Sent to ' + mobileNumber, result: 1, data: content };
+    }
+    {
+        // const url = SMSClient.getInstance().buildSMSStrikerURL(mobileNumber, content);
+        // request(url, (error: any, response: any, body: any) => {
+        //   if (!error && response.statusCode === 200) {
+        //     return { message: 'SMS Sent to ' + mobileNumber, result: 1, data: body };
+        //   } else {
+        //     return { result: 0, message: 'Something went wrong' };
+        //   }
+        // });
+        // Create SMS Attribute parameters
+        const params = {
+            Message: content,
+            PhoneNumber: mobileNumber,
+            attributes: {
+                DefaultSMSType: highImportance ? 'Transactional' : 'Promotional',
+            },
+        };
+        // Create promise and SNS service object
+        const setSMSTypePromise = TangosNotifClient_1.TangosNotifClient.getInstance().sns.publish(params).promise();
+        // Handle promise's fulfilled/rejected states
+        try {
+            const data = await setSMSTypePromise;
+            return { data, result: 1, message: 'SMS Sent to ' + mobileNumber };
         }
-        {
-            const url = SMSClient_1.SMSClient.getInstance().buildSMSStrikerURL(mobileNumber, content);
-            request_1.default(url, (error, response, body) => {
-                if (!error && response.statusCode === 200) {
-                    resolve({ message: 'SMS Sent to ' + mobileNumber, result: 1, data: body });
-                }
-                else {
-                    resolve({ result: 0, message: 'Something went wrong' });
-                }
-            });
+        catch (e) {
+            return { result: 1, message: 'Something wen\'t wrong', data: e };
         }
-    });
+    }
 }
 exports.sendSMS = sendSMS;
