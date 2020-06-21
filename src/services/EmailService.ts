@@ -1,12 +1,12 @@
-import { AWSSESClient } from '../clients/AWSSESClient';
+import { TangosNotifClient } from '../clients/TangosNotifClient';
 const charset = 'UTF-8';
 
 export function sendEmail(subject: string, recipient: string, bodyHtml: string, bodyText: string) {
 
   console.log('Sending HTML Email to ', recipient);
 
-  const params:any = {
-    Source: AWSSESClient.senderEmail,
+  const params: any = {
+    Source: TangosNotifClient.senderEmail,
     Destination: {
       ToAddresses: [
         recipient,
@@ -30,12 +30,12 @@ export function sendEmail(subject: string, recipient: string, bodyHtml: string, 
     },
   };
 
-  if (!AWSSESClient.isEmailServiceEnabled) {
+  if (!TangosNotifClient.isEmailServiceEnabled) {
     return Promise.resolve({ message: 'Email sent', data: null, result: 1 });
   }
 
   return new Promise((resolve) => {
-    AWSSESClient.getInstance().ses.sendEmail(params, (err: any, data: any) => {
+    TangosNotifClient.getInstance().ses.sendEmail(params, (err: any, data: any) => {
       if (err) {
         resolve({ result: 0, error: err });
       } else {

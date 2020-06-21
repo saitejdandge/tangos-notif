@@ -1,9 +1,8 @@
-import { SMSClient } from '../clients/SMSClient';
-import { AWSSESClient } from '../clients/AWSSESClient';
+import { TangosNotifClient } from '../clients/TangosNotifClient';
 
 export function setEmailServiceEnabled(value: boolean) {
-  AWSSESClient.isEmailServiceEnabled = value;
+  TangosNotifClient.isEmailServiceEnabled = value;
 }
 export function setSMSServiceEnabled(value: boolean) {
-  SMSClient.isSMSServiceEnabled = value;
+  TangosNotifClient.isSMSServiceEnabled = value;
 }

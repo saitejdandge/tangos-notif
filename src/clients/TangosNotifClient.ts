@@ -1,21 +1,17 @@
-import { config, SES } from 'aws-sdk';
+import { config, SES, SNS } from 'aws-sdk';
 
-export class AWSSESClient {
-  private static awsClient: AWSSESClient;
-  public ses: SES = new SES();
+export class TangosNotifClient {
+
   public static isEmailServiceEnabled: boolean = true;
-
-  private static accessKeyId: string;
-  private static region: string = 'us-east-1';
-  private static secretAccessKey: string;
+  public static isSMSServiceEnabled: boolean = true;
   public static senderEmail: string;
 
-  public static getInstance(): AWSSESClient {
-    if (AWSSESClient.awsClient == null) {
+  public static getInstance(): TangosNotifClient {
+    if (TangosNotifClient.awsClient == null) {
       if (this.accessKeyId == null || this.secretAccessKey == null || this.senderEmail == null) {
         throw new Error('Please call AWSSESClient.initConfig() method before using its instance');
       } else {
-        this.awsClient = new AWSSESClient();
+        this.awsClient = new TangosNotifClient();
       }
     }
     return this.awsClient;
@@ -31,4 +27,11 @@ export class AWSSESClient {
       secretAccessKey: secretAccess,
     });
   }
+  private static awsClient: TangosNotifClient;
+
+  private static accessKeyId: string;
+  private static region: string = 'us-east-1';
+  private static secretAccessKey: string;
+  public ses: SES = new SES();
+  public sns: SNS = new SNS();
 }
