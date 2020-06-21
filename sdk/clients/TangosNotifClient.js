@@ -8,8 +8,8 @@ class TangosNotifClient {
     }
     static getInstance() {
         if (TangosNotifClient.awsClient == null) {
-            if (this.accessKeyId == null || this.secretAccessKey == null || this.senderEmail == null) {
-                throw new Error('Please call AWSSESClient.initConfig() method before using its instance');
+            if (this.accessKeyId == null || this.secretAccessKey == null || this.senderEmail == null || this.fcmServerKey == null) {
+                throw new Error('Please call TangosNotifClient.initConfig() method before using its instance');
             }
             else {
                 this.awsClient = new TangosNotifClient();
@@ -17,9 +17,10 @@ class TangosNotifClient {
         }
         return this.awsClient;
     }
-    static initConfig(keyId, secretAccess, senderEmail) {
+    static initConfig(keyId, secretAccess, senderEmail, fcmServerKey) {
         this.accessKeyId = keyId;
         this.secretAccessKey = secretAccess;
+        this.fcmServerKey = fcmServerKey;
         this.senderEmail = senderEmail;
         aws_sdk_1.config.update({
             accessKeyId: keyId,

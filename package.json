@@ -1,6 +1,6 @@
 {
   "name": "tangos-notif",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Tangos Notif Util ",
   "main": "index.js",
   "lib": [
@@ -23,12 +23,11 @@
   "homepage": "https://github.com/appening/tangos-notif#readme",
   "dependencies": {
     "aws-sdk": "^2.608.0",
+    "axios": "^0.19.2",
     "request": "^2.88.0"
   },
   "devDependencies": {
     "@types/request": "^2.48.4",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "tslint": "^6.0.0",
     "typescript": "^3.7.5"
   }
