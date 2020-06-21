@@ -37,7 +37,7 @@ export function sendEmail(subject: string, recipient: string, bodyHtml: string, 
   return new Promise((resolve) => {
     TangosNotifClient.getInstance().ses.sendEmail(params, (err: any, data: any) => {
       if (err) {
-        resolve({ result: 0, error: err });
+        resolve({ result: 0, data: err, message: 'Something wen\'t wrong' });
       } else {
         resolve({ data, message: 'Email sent' + data.MessageId, result: 1 });
       }

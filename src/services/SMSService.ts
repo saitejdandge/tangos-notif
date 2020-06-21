@@ -14,15 +14,21 @@ export async function sendSMS(mobileNumber: string, content: string, highImporta
     // });
     // Create SMS Attribute parameters
     const params: any = {
+      Message: content, /* required */
+      PhoneNumber: mobileNumber,
       attributes: {
         DefaultSMSType: highImportance ? 'Transactional' : 'Promotional',
       },
     };
 
     // Create promise and SNS service object
-    const setSMSTypePromise: any = TangosNotifClient.getInstance().sns.setSMSAttributes(params).promise();
+    const setSMSTypePromise: any = TangosNotifClient.getInstance().sns.publish(params).promise();
     // Handle promise's fulfilled/rejected states
-    return await setSMSTypePromise;
-
+    try {
+      const data: any = await setSMSTypePromise;
+      return { data, result: 1, message: 'SMS Sent to ' + mobileNumber };
+    } catch (e) {
+      return { result: 1, message: 'Something wen\'t wrong', data: e };
+    }
   }
 }
