@@ -16,9 +16,7 @@ export async function sendSMS(mobileNumber: string, content: string, highImporta
     const params: any = {
       Message: content, /* required */
       PhoneNumber: mobileNumber,
-      attributes: {
-        DefaultSMSType: highImportance ? 'Transactional' : 'Promotional',
-      },
+      DefaultSMSType: highImportance ? 'Transactional' : 'Promotional',
     };
 
     // Create promise and SNS service object

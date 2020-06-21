@@ -18,9 +18,7 @@ async function sendSMS(mobileNumber, content, highImportance = true) {
         const params = {
             Message: content,
             PhoneNumber: mobileNumber,
-            attributes: {
-                DefaultSMSType: highImportance ? 'Transactional' : 'Promotional',
-            },
+            DefaultSMSType: highImportance ? 'Transactional' : 'Promotional',
         };
         // Create promise and SNS service object
         const setSMSTypePromise = TangosNotifClient_1.TangosNotifClient.getInstance().sns.publish(params).promise();
